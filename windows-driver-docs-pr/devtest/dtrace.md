@@ -156,6 +156,10 @@ C:\Windows\system32>dtrace -ln "pid$target:ntdll:RtlAllocateHeap:entry" -c notep
  5102    pid6100             ntdll                   RtlAllocateHeap entry
 ```
 
+> [!NOTE]
+> When you trace functions written in C++, function name might be too long or decorated to be specified as a probe in a probe name in their full form. Commonly used workaround is to use an expression that will uniquely match your function of interest. For example, use 'String??Copy' as a 'probefunc' portion of the probe name to match 'String::Copy()', or '*QueryMigrationStatusImpl' to match 'StorageVDevMigrationImpl::QueryMigrationStatusImpl()'.
+
+
 ## DTrace Windows architecture
 
 Users interact with DTrace through the DTrace command, which serves as a front-end to the DTrace engine. D scripts get compiled to an intermediate format (DIF) in user-space and sent to the DTrace kernel component for execution, sometimes called as the DIF Virtual Machine. This runs in the dtrace.sys driver.
